@@ -4,18 +4,18 @@ import { Filter } from "../Filter/Filter.jsx";
 import { EmptyMessage } from "../EmptyMessage/EmptyMessage.jsx";
 import { Container } from "../Container/Container.jsx";
 
-export const ContactList = ({
-  filter,
-  onChange,
-  filterNumber,
-  contacts,
-  deleteNumber,
-}) => {
+import { RestoreButton } from "../RestoreButton/RestoreButton.jsx";
+import React, { useContext } from "react";
+import { ContactsContext } from "../../contexts/ContactsContext.jsx";
+
+export const ContactList = () => {
+  const { filterNumber, lastDeletedContacts } = useContext(ContactsContext);
+  const contacts = filterNumber();
   return (
     <Container>
       <Wrapper>
         <Title>Your Contacts</Title>
-        <Filter filter={filter} onChange={onChange} />
+        <Filter />
         {filterNumber().length === 0 ? (
           <EmptyMessage />
         ) : (
@@ -26,11 +26,11 @@ export const ContactList = ({
                 id={cont.id}
                 name={cont.name}
                 number={cont.number}
-                deleteNumber={deleteNumber}
               />
             ))}
           </List>
         )}
+        {lastDeletedContacts.current ? <RestoreButton /> : ""}
       </Wrapper>
     </Container>
   );

@@ -1,8 +1,12 @@
 import { Label, Input } from "./Filter";
 
-export const Filter = ({ onChange, filter }) => {
+import React, { useContext } from "react";
+import { ContactsContext } from "../../contexts/ContactsContext.jsx";
+
+export const Filter = () => {
+  const { filter, setNewFilter } = useContext(ContactsContext);
   const handleChange = (e) => {
-    onChange(e.target.value);
+    setNewFilter(e.target.value);
   };
 
   return (

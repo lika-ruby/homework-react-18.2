@@ -1,7 +1,11 @@
 import { Form, Labels, Label, Input, Button } from "./ContactForm.js";
 import { useState } from "react";
+import React, { useContext } from "react";
+import { ContactsContext } from "../../contexts/ContactsContext.jsx";
 
-export const ContactForm = ({ addNumber }) => {
+export const ContactForm = () => {
+  const { addNumber } = useContext(ContactsContext);
+
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
